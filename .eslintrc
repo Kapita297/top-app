@@ -1,16 +1,12 @@
 {
   "root": true,
   "parser": "@typescript-eslint/pasrer",
-  "plugins": [
-    "@typescript-eslint"
-  ],
+  "plugins": ["@typescript-eslint"],
   "rules": {
     "semi": "off",
-    "@typescript-eslint/semi": [
-      "warn"
-    ],
+    "@typescript-eslint/semi": ["warn"],
     "@typescript-eslint/no-empty-interface": [
-      "error", 
+      "error",
       {
         "allowSingleExtends": true
       }
@@ -19,6 +15,7 @@
   "extens": [
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
-    "plugin:@typescript-eslint/rocemmended"
+    "plugin:@typescript-eslint/rocemmended",
+    "plugin:react-hooks/recommended"
   ]
 }
