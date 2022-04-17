@@ -10,14 +10,30 @@ import { ParsedUrlQuery } from 'querystring';
 import { ProductModel } from '../../interfaces/product.interface';
 import { firstLevelMenu } from '../../helpers/helpers';
 import { TopPageComponent } from '../../page-components';
+import { API } from '../../helpers/Api';
+import Head from 'next/head';
+import { Error404 } from '../404';
 
 function TopPage({ firstCategory, page, products }: TopPageProps) {
+  if (!page || !products) {
+    return <Error404 />;
+  }
+
   return (
-    <TopPageComponent
-      firstCategory={firstCategory}
-      page={page}
-      products={products}
-    />
+    <>
+      <Head>
+        <title>{page.metaTitle}</title>
+        <meta name="description" content={page.metaDescription} />
+        <meta property="og:title" content={page.metaTitle} />
+        <meta property="og:description" content={page.metaDescription} />
+        <meta property="og:type" content="article" />
+      </Head>
+      <TopPageComponent
+        firstCategory={firstCategory}
+        page={page}
+        products={products}
+      />
+    </>
   );
 }
 
@@ -38,7 +54,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }
   return {
     paths,
-    fallback: true,
+    fallback: false,
   };
 };
 
@@ -53,20 +69,17 @@ export const getStaticProps: GetStaticProps<TopPageProps> = async ({
     return { notFound: true };
   }
   try {
-    const { data: menu } = await axios.post<MenuItem[]>(
-      process.env.NEXT_PUBLIC_DOMAIN + '/api/top-page/find',
-      {
-        firstCategory: firstCategoryItem.id,
-      }
-    );
+    const { data: menu } = await axios.post<MenuItem[]>(API.topPage.find, {
+      firstCategory: firstCategoryItem.id,
+    });
     if (menu.length == 0) {
       return { notFound: true };
     }
     const { data: page } = await axios.get<TopPageModel>(
-      process.env.NEXT_PUBLIC_DOMAIN + '/api/top-page/byAlias/' + params.alias
+      API.topPage.byAlias + params.alias
     );
     const { data: products } = await axios.post<ProductModel[]>(
-      process.env.NEXT_PUBLIC_DOMAIN + '/api/product/find',
+      API.product.find,
       {
         category: page.category,
         limit: 10,

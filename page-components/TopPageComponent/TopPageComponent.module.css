@@ -43,3 +43,38 @@
 	font-weight: 600;
 	line-height: 27px;
 }
+
+.tag {
+	margin: 2px;
+}
+
+@media screen and (max-width: 1320px) {
+	.tags {
+		display: grid;		
+		grid-template-columns: auto auto auto;
+	}
+}
+
+@media screen and (max-width: 920px) {
+	.tags {
+		
+		grid-template-columns: auto auto;
+
+	}
+}
+
+@media screen and (max-width: 640px) {
+	.title {
+		grid-template-columns: auto 1fr;
+	}
+
+	
+}
+
+@media screen and (max-width: 480px) {
+	.tags {
+		
+		grid-template-columns: auto;
+
+	}
+}

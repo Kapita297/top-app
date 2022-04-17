@@ -16,16 +16,57 @@ a {
 	box-sizing: border-box;
 }
 
+.display {
+	position: absolute;
+
+	overflow: hidden;
+
+	width: 0;
+	height: 0;
+}
+
+.home {
+	display: grid;
+	grid-template-areas: 
+		'h1 h1 h2'
+		'h1 h1 h2'
+		'curses curses h2'
+		'curses curses h2'
+		
+}
+
+.h1 {
+	grid-area: h1;
+}
+
+.h2 {
+	grid-area: h2;
+}
+
+.curses {
+	grid-area: curses;
+	
+	margin-right: 20px;
+}
+
+.all {
+	grid-area: all;
+
+	align-self: end;
+}
+
 :root {
 	--black: #3B434E;
 	--gray-light: #EBEBEB;
-	--gray-dark:  #787D85;
+	--gray-dark:  #71767D;
+	--gray: #A4A4A4;
 	--white: white; 
 	--primary: #7653FC;
 	--primary-hover: #6344DF;
+	--red-light: #FEA291;
 	--red: #FC836D;
-	--green: #1DC37E;
-	--green-light: #C8F8E4;
+	--green: #189F67;
+	--green-light: #A2F7D4;
 	--font-family: 'Noto Sans KR', sans-serif;
 
 }
